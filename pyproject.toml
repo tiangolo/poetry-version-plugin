@@ -17,8 +17,7 @@ flake8 = "^3.9.2"
 black = "^21.5-beta.1"
 
 [tool.poetry.plugins."poetry.plugin"]
-init-version = "poetry_version_plugin.plugin:InitVersion"
-git-tag-version = "poetry_version_plugin.plugin:GitTagVersion"
+poetry-version-plugin = "poetry_version_plugin.plugin:VersionPlugin"
 
 [build-system]
 requires = ["poetry-core"]
