@@ -12,7 +12,7 @@ from poetry.poetry import Poetry
 class VersionPlugin(Plugin):
     def activate(self, poetry: Poetry, io: IO):
         poetry_version_config: dict = poetry.pyproject.data.get("tool", {}).get(
-            "poetry-version", {}
+            "poetry-version-plugin", {}
         )
         if not poetry_version_config:
             io.write_line(
