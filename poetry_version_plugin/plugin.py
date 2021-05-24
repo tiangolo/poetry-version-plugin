@@ -58,12 +58,16 @@ class VersionPlugin(Plugin):
                                 value_node = el.value
                                 if isinstance(value_node, ast.Constant):
                                     version = value_node.value
-                                    io.write_line(
-                                        "Setting package dynamic version to __version__ "
-                                        f"variable from __init__.py: <b>{version}</b>"
-                                    )
-                                    poetry.package.set_version(version)
-                                    return
+                                elif isinstance(value_node, ast.Str):
+                                    version = value_node.s
+                                else:
+                                    continue
+                                io.write_line(
+                                    "Setting package dynamic version to __version__ "
+                                    f"variable from __init__.py: <b>{version}</b>"
+                                )
+                                poetry.package.set_version(version)
+                                return
             message = (
                 "No valid __version__ variable found in __init__.py, "
                 "cannot extract dynamic version"
