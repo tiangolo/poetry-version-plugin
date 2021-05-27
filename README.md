@@ -353,6 +353,7 @@ let me know what alternative configuration would make more sense and be more int
 
 ### Latest Changes
 
+* 🔧 Update pyproject metadata. PR [#5](https://github.com/tiangolo/poetry-version-plugin/pull/5) by [@tiangolo](https://github.com/tiangolo).
 * ✅ Fix coverage. PR [#4](https://github.com/tiangolo/poetry-version-plugin/pull/4) by [@tiangolo](https://github.com/tiangolo).
 * 📝 Improve docs. PR [#3](https://github.com/tiangolo/poetry-version-plugin/pull/3) by [@tiangolo](https://github.com/tiangolo).
 * 🐛 Fix tests for CI. PR [#1](https://github.com/tiangolo/poetry-version-plugin/pull/1) by [@tiangolo](https://github.com/tiangolo).
