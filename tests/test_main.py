@@ -152,6 +152,22 @@ def test_git_tag(tmp_path: Path):
     )
     assert result.returncode == 0
     result = result = subprocess.run(
+        ["git", "config", "user.email", "tester@example.com"],
+        cwd=testing_dir,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        encoding="utf-8",
+    )
+    assert result.returncode == 0
+    result = result = subprocess.run(
+        ["git", "config", "user.name", "Tester"],
+        cwd=testing_dir,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        encoding="utf-8",
+    )
+    assert result.returncode == 0
+    result = result = subprocess.run(
         ["git", "add", "."],
         cwd=testing_dir,
         stdout=subprocess.PIPE,
