@@ -1,5 +1,18 @@
 # Poetry Version Plugin
 
+<a href="https://github.com/tiangolo/poetry-version-plugin/actions?query=workflow%3ATest" target="_blank">
+    <img src="https://github.com/tiangolo/poetry-version-plugin/workflows/Test/badge.svg" alt="Test">
+</a>
+<a href="https://github.com/tiangolo/poetry-version-plugin/actions?query=workflow%3APublish" target="_blank">
+    <img src="https://github.com/tiangolo/poetry-version-plugin/workflows/Publish/badge.svg" alt="Publish">
+</a>
+<a href="https://codecov.io/gh/tiangolo/poetry-version-plugin" target="_blank">
+    <img src="https://img.shields.io/codecov/c/github/tiangolo/poetry-version-plugin?color=%2334D058" alt="Coverage">
+</a>
+<a href="https://pypi.org/project/poetry-version-plugin" target="_blank">
+    <img src="https://img.shields.io/pypi/v/poetry-version-plugin?color=%2334D058&label=pypi%20package" alt="Package version">
+</a>
+
 A [Poetry](https://python-poetry.org/) plugin for dynamically extracting the version of a package from a `__version__` variable in the `__init__.py` file or from a Git tag.
 
 This is useful mainly if you are building a package library for others to use and you want to set the version in a place different than `pyproject.toml` and still keep a [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth).
@@ -300,3 +313,13 @@ source = "git-tag"
 let me know what alternative configuration would make more sense and be more intuitive to you.
 
 The good news is, assuming you are building packages to then upload them to PyPI for your users to download and use them, the worst that could happen if something broke is that you wouldn't be able to build a new version until something is fixed or changed. But your users shouldn't be affected in any way.
+
+## Release Notes
+
+### Latest Changes
+
+
+
+## License
+
+This project is licensed under the terms of the MIT license.
