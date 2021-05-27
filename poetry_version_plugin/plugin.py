@@ -19,8 +19,9 @@ class VersionPlugin(Plugin):  # type: ignore
         version_source = poetry_version_config.get("source")
         if not version_source:
             message = (
-                "No <b>source</b> configuration found in [tool.poetry-version-plugin] "
-                "in pyproject.toml, not extracting dynamic version"
+                "<b>poetry-version-plugin</b>: No <b>source</b> configuration found in "
+                "[tool.poetry-version-plugin] in pyproject.toml, not extracting "
+                "dynamic version"
             )
             io.write_error_line(message)
             raise RuntimeError(message)
@@ -31,7 +32,8 @@ class VersionPlugin(Plugin):  # type: ignore
                     package_name = packages[0]["include"]
                 else:
                     message = (
-                        "More than one package set, cannot extract dynamic version"
+                        "<b>poetry-version-plugin</b>: More than one package set, "
+                        "cannot extract dynamic version"
                     )
                     io.write_error_line(message)
                     raise RuntimeError(message)
@@ -40,14 +42,15 @@ class VersionPlugin(Plugin):  # type: ignore
             init_path = Path(package_name) / "__init__.py"
             if not init_path.is_file():
                 message = (
-                    f"__init__.py file not found at {init_path} cannot extract "
-                    "dynamic version"
+                    "<b>poetry-version-plugin</b>: __init__.py file not found at "
+                    f"{init_path} cannot extract dynamic version"
                 )
                 io.write_error_line(message)
                 raise RuntimeError(message)
             else:
                 io.write_line(
-                    f"Using __init__.py file at {init_path} for dynamic version"
+                    "<b>poetry-version-plugin</b>: Using __init__.py file at "
+                    f"{init_path} for dynamic version"
                 )
             tree = ast.parse(init_path.read_text())
             for el in tree.body:
@@ -67,14 +70,15 @@ class VersionPlugin(Plugin):  # type: ignore
                                     # Ref: https://github.com/nedbat/coveragepy/issues/198
                                     continue
                                 io.write_line(
-                                    "Setting package dynamic version to __version__ "
+                                    "<b>poetry-version-plugin</b>: Setting package "
+                                    "dynamic version to __version__ "
                                     f"variable from __init__.py: <b>{version}</b>"
                                 )
                                 poetry.package.set_version(version)
                                 return
             message = (
-                "No valid __version__ variable found in __init__.py, "
-                "cannot extract dynamic version"
+                "<b>poetry-version-plugin</b>: No valid __version__ variable found "
+                "in __init__.py, cannot extract dynamic version"
             )
             io.write_error_line(message)
             raise RuntimeError(message)
@@ -87,10 +91,16 @@ class VersionPlugin(Plugin):  # type: ignore
             )
             if result.returncode == 0:
                 tag = result.stdout.strip()
-                io.write_line(f"Git tag found, setting dynamic version to: {tag}")
+                io.write_line(
+                    "<b>poetry-version-plugin</b>: Git tag found, setting "
+                    f"dynamic version to: {tag}"
+                )
                 poetry.package.set_version(tag)
                 return
             else:
-                message = "No Git tag found, not extracting dynamic version"
+                message = (
+                    "<b>poetry-version-plugin</b>: No Git tag found, not "
+                    "extracting dynamic version"
+                )
                 io.write_error_line(message)
                 raise RuntimeError(message)
