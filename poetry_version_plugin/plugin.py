@@ -1,49 +1,50 @@
-from pathlib import Path
-import subprocess
 import ast
+import subprocess
+from pathlib import Path
+from typing import Optional
 
 from cleo.io.io import IO
-
 from poetry.plugins.plugin import Plugin
-from poetry.utils.helpers import module_name
 from poetry.poetry import Poetry
+from poetry.utils.helpers import module_name
 
 
 class VersionPlugin(Plugin):
     def activate(self, poetry: Poetry, io: IO):
-        poetry_version_config: dict = poetry.pyproject.data.get("tool", {}).get(
-            "poetry-version-plugin", {}
-        )
-        if not poetry_version_config:
-            io.write_line(
-                "No section <b>[tool.poetry-version]</b> found in pyproject.toml, "
-                "not extracting dynamic version"
-            )
+        poetry_version_config: Optional[dict] = poetry.pyproject.data.get(
+            "tool", {}
+        ).get("poetry-version-plugin")
+        if poetry_version_config is None:
             return None
         version_source = poetry_version_config.get("source")
         if not version_source:
-            io.write_line(
-                "No <b>source</b> configuration found in [tool.poetry-version] in "
-                "pyproject.toml, not extracting dynamic version"
+            message = (
+                "No <b>source</b> configuration found in [tool.poetry-version-plugin] "
+                "in pyproject.toml, not extracting dynamic version"
             )
+            io.write_error_line(message)
+            raise RuntimeError(message)
         if version_source == "init":
             packages = poetry.local_config.get("packages")
             if packages:
                 if len(packages) == 1:
                     package_name = packages[0]["include"]
                 else:
-                    io.write_error_line(
-                        "More than one package set, " "cannot extract dynamic version"
+                    message = (
+                        "More than one package set, cannot extract dynamic version"
                     )
-                    return
+                    io.write_error_line(message)
+                    raise RuntimeError(message)
             else:
                 package_name = module_name(poetry.package.name)
             init_path = Path(package_name) / "__init__.py"
             if not init_path.is_file():
-                io.write_error_line(
-                    f"__init__.py file not found at {init_path}, "
-                    "cannot extract dynamic version"
+                message = (
+                    f"__init__.py file not found at {init_path} cannot extract "
+                    "dynamic version"
                 )
+                io.write_error_line(message)
+                raise RuntimeError(message)
             else:
                 io.write_line(
                     f"Using __init__.py file at {init_path} for dynamic version"
