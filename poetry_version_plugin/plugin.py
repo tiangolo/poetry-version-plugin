@@ -1,7 +1,7 @@
 import ast
 import subprocess
 from pathlib import Path
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from cleo.io.io import IO
 from poetry.plugins.plugin import Plugin
@@ -9,13 +9,13 @@ from poetry.poetry import Poetry
 from poetry.utils.helpers import module_name
 
 
-class VersionPlugin(Plugin):
-    def activate(self, poetry: Poetry, io: IO):
-        poetry_version_config: Optional[dict] = poetry.pyproject.data.get(
+class VersionPlugin(Plugin):  # type: ignore
+    def activate(self, poetry: Poetry, io: IO) -> None:
+        poetry_version_config: Optional[Dict[str, Any]] = poetry.pyproject.data.get(
             "tool", {}
         ).get("poetry-version-plugin")
         if poetry_version_config is None:
-            return None
+            return
         version_source = poetry_version_config.get("source")
         if not version_source:
             message = (
