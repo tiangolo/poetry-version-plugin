@@ -353,6 +353,7 @@ let me know what alternative configuration would make more sense and be more int
 
 ### Latest Changes
 
+* 📝 Improve docs. PR [#3](https://github.com/tiangolo/poetry-version-plugin/pull/3) by [@tiangolo](https://github.com/tiangolo).
 * 🐛 Fix tests for CI. PR [#1](https://github.com/tiangolo/poetry-version-plugin/pull/1) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Fix Latest Changes action, set branch to main. PR [#2](https://github.com/tiangolo/poetry-version-plugin/pull/2) by [@tiangolo](https://github.com/tiangolo).
 
