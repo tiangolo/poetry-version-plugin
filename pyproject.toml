@@ -7,14 +7,16 @@ readme = "README.md"
 packages = [{include = "poetry_version_plugin"}]
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
-poetry = "^1.2.0a"
+python = "^3.6"
+poetry = "^1.2.0a1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
 mypy = "^0.812"
 flake8 = "^3.9.2"
-black = "^21.5-beta.1"
+black = {version = "^21.5-beta.1", python = ">3.6.2"}
+coverage = {extras = ["toml"], version = "^5.5"}
+pkginfo = "^1.7.0"
 
 [tool.poetry.plugins."poetry.plugin"]
 poetry-version-plugin = "poetry_version_plugin.plugin:VersionPlugin"
@@ -22,3 +24,6 @@ poetry-version-plugin = "poetry_version_plugin.plugin:VersionPlugin"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+parallel = true
