@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "poetry-version-plugin"
-version = "0.1.2"
+version = "0.1.3"
 description = "Poetry plugin for dynamically extracting the package version from a __version__ variable or a Git tag."
 authors = ["Sebastián Ramírez <tiangolo@gmail.com>"]
 homepage = "https://github.com/tiangolo/poetry-version-plugin"
