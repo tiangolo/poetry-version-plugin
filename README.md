@@ -13,19 +13,35 @@
     <img src="https://img.shields.io/pypi/v/poetry-version-plugin?color=%2334D058&label=pypi%20package" alt="Package version">
 </a>
 
-A [Poetry](https://python-poetry.org/) plugin for dynamically extracting the version of a package from a `__version__` variable in the `__init__.py` file or from a Git tag.
+A [**Poetry**](https://python-poetry.org/) plugin for dynamically extracting the package **version**.
 
-This is useful mainly if you are building a package library for others to use and you want to set the version in a place different than `pyproject.toml` and still keep a [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth).
+It can read the version from a file `__init__.py` with:
 
-It won't be useful in other use cases like managing local app environments with Poetry.
+```python
+# __init__.py
+
+__version__ = "0.1.0"
+```
+
+or alternatively, it can read it from a **git tag**, set with:
+
+```console
+$ git tag 0.1.0
+```
 
 🚨 Consider this in alpha stage. Read the warning below.
+
+## When to use
+
+This is useful mainly if you are building a package library for others to use and you want to set the version in a place different than `pyproject.toml`, but you still want to keep a [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth).
+
+It won't be useful in other use cases like managing local app environments with Poetry.
 
 ## How to use
 
 Make sure you have Poetry version `1.2.0a1` or above. Read below for instructions to install it if you haven't.
 
-### Install `poetry-version-plugin`
+### Install Poetry Version Plugin
 
 Install this plugin to your Poetry:
 
@@ -35,9 +51,9 @@ $ poetry plugin add poetry-version-plugin
 --> 100%
 ```
 
-### Set `__version__` inside of `__init__.py`
+### Set version in init file
 
-If you want to specify the single source of truth for your version in a `__version__` variable inside the `__init__.py` file, do that, for example:
+Set your package version in your file `__init__.py`, for example:
 
 ```python
 from .main import do_awesome_stuff, AwesomeClass
@@ -104,11 +120,9 @@ To make it more obvious that you are not really using that `version` you can set
 [tool.poetry]
 name = "my-awesome-package"
 version = "0"
-
-...
 ```
 
-That way, you will notice more easily if the plugin is not installed, as it will show that you are building a package with version `0` instead of the dynamic version set.
+That way, you will more easily notice if the plugin is not installed, as it will show that you are building a package with version `0` instead of the dynamic version set.
 
 ## An example `pyproject.toml`
 
@@ -137,32 +151,33 @@ source = "init"
 
 By default Poetry expects you to set your package version in `pyproject.toml`. And that would work in most cases.
 
-But imagine you want to, for example, expose the version of your package in a `__version__` variable, so that your users can do things like:
+But imagine you want to expose the version of your package in a `__version__` variable, so that your users can do things like:
 
 ```python
 import my_awesome_package
 print(my_awesome_package.__version__)
 ```
 
-You could manually write the `__version__` variable and handle the synchronization between it and the `pyproject.toml` yourself, which is very error-prone.
+You could manually write the `__version__` variable and handle the synchronization between it and the `pyproject.toml` yourself, which is very **error-prone**.
 
 The current [official way of doing it without duplicating the value](https://github.com/python-poetry/poetry/pull/2366#issuecomment-652418094) is with `importlib.metadata`.
 
-But that module is only available in Python 3.8. So, for Python 3.7 and 3.6 you have to install a backport as a dependency of your package:
+But that module is only available in Python 3.8 and above. So, for Python 3.7 and 3.6 you have to install a backport as a dependency of your package:
 
 ```toml
 [tool.poetry.dependencies]
-...
 importlib-metadata = {version = "^1.0", python = "<3.8"}
 ```
 
-But then, when they release each new version of the backport (currently `4.0.1`), you have to update it (or not). And your users would have to manually handle conflicts with any other packages that also depend on `importlib-metadata`, which could be many, as many packages could be doing the same trick (I've dealt with that).
+But then, when they release each new version of the backport (currently `4.0.1`), you have to update it (or not). And your users would have to manually handle conflicts with any other packages that also depend on `importlib-metadata`, which could be multiple, as many packages could be doing the same trick (I've dealt with that).
 
 The other option is not to pin any version range of your `importlib-metadata` in your `pyproject.toml` and hope for the best.
 
 And then your `__init__.py` would have to include code using it, like:
 
 ```python
+# I don't want this extra complexity 😔
+# And it doesn't work in Docker 🐋
 try:
     import importlib.metadata as importlib_metadata
 except ModuleNotFoundError:
@@ -173,11 +188,23 @@ __version__ = importlib_metadata.version(__name__)
 
 But that code is extra complexity and logic needed in your code, in each of your packages.
 
-🚨 Additionally, this only works when your package is installed in a Python environment. It won't work if, for example, you simply put your code in a container, which is common for web apps and distributed systems.
+🚨 Additionally, this only works when your package is installed in a Python environment. It won't work if, for example, you simply put your code in a **container**, which is common for web apps and distributed systems.
 
-✨ With this plugin, your package doesn't depend on `importlib-metadata`, so your users won't need to handle conflicts. Instead, your build system (Poetry) is what needs to have this plugin installed. That avoids the extra code complexity on your side, dependency conflicts for your users, and support for other use cases like code copied in a container.
+### How this plugin solves it
 
-✨ Alternatively, this plugin can also extract the version from a Git tag. So, you could only create each version in a Git tag (for example, a GitHub release) instead of writing it in code. And then build the package on Continuous Integration (e.g. GitHub Actions). And this plugin would get the version of the package from that Git tag.
+With this plugin, your package doesn't depend on `importlib-metadata`, so your users won't need to handle conflicts or extra dependencies.
+
+Instead, your build system (Poetry) is what needs to have this plugin installed.
+
+That avoids the extra code complexity on your side, dependency conflicts for your users, and support for other use cases like code copied directly inside a container.
+
+### Version from Git tag
+
+Alternatively, this plugin can also extract the version from a Git tag.
+
+So, you could only create each version in a Git tag (for example, a GitHub release) instead of writing it in code.
+
+And then build the package on Continuous Integration (e.g. GitHub Actions). And this plugin would get the version of the package from that Git tag.
 
 ## Install Poetry `1.2.0a1`
 
@@ -216,11 +243,11 @@ $ poetry --version
 Poetry (version 1.2.0a1)
 ```
 
-## `__version__` in `__init__.py` support
+## Version in init file support
 
 When using a `__version__` variable in your `__init__.py` you can have more logic in that file, import modules, and do more things above and below the declaration of that variable.
 
-But the value has to be literal, a literal string, like:
+But the value has to be a literal string, like:
 
 ```python
 ___version___ = "0.2.0"
@@ -230,14 +257,16 @@ ___version___ = "0.2.0"
 
 And the variable has to be in the top-level, so it can't be inside an `if` statement or similar.
 
-But all this is fine:
+This is all fine and supported in your `__init__.py`:
 
 ```python
+# __init__.py
+
 from .main import do_awesome_stuff, AwesomeClass
 
 awesome = AwesomeClass()
 
-# Uncomment this line once we are ready to release version 1
+# Some comment explaining why this is commented out
 # __version__ = "1.0.0"
 
 __version__ = "0.2.3"
@@ -278,13 +307,13 @@ __version__ = get_version()
 
 Poetry runs the plugin when building a package, and it sets the version right before creating the "package distributable" (e.g. the wheel).
 
-### How `__version__` works
+### How the version variable works
 
 If you have a package (a single package) declared in the `packages` config in your `pyproject.toml`, the plugin will use that package's `__init__.py` to find the `__version__` variable.
 
 If you don't have any `packages` config, the plugin will assume that you have a single package named as your project, but in the module version (changing `-` for `_`). So, if your package is `my-awesome-project`, the plugin will use the file at `my_awesome_project/__init__.py` to find the `__version__` variable.
 
-This file structure is the default if you create a new project with the command `poetry new`, so it should just work as expected.
+This file structure is the default if you create a new project with the command `poetry new`, so it should just work as expected. ✨
 
 The way the plugin works internally is by parsing the `__init__.py` file. Reading the Python's "Abstract Syntax Tree" using the `ast` standard module and extracting the literal value of the string. So, it doesn't execute the code in `__init__.py`, it only reads it as Python code.
 
@@ -292,7 +321,9 @@ The plugin doesn't try to import and execute that `__init__.py` file because tha
 
 ## Warning
 
-Consider this in alpha stage. Poetry `1.2.0a1` with support for plugins was released on 2021-05-21, I started writing this plugin 3 days later, on 2021-05-24. Things might break in Poetry or in this plugin. So, please try it and test it very carefully before fully adopting it for delicate systems.
+🚨 Consider this in alpha stage. Poetry `1.2.0a1` with support for plugins was released on 2021-05-21, I started writing this plugin 3 days later, on 2021-05-24.
+
+Things might break in Poetry or in this plugin. So, please try it and test it very carefully before fully adopting it for delicate systems.
 
 The way it works might change, and the specific configuration might change.
 
@@ -312,7 +343,7 @@ source = "git-tag"
 
 let me know what alternative configuration would make more sense and be more intuitive to you.
 
-The good news is, assuming you are building packages to then upload them to PyPI for your users to download and use them, the worst that could happen if something broke is that you wouldn't be able to build a new version until something is fixed or changed. But your users shouldn't be affected in any way.
+👍 The good news is, assuming you are building packages to then upload them to PyPI for your users to download and use them, the **worst that could happen** if something broke is that you wouldn't be able to build a new version until something is fixed or changed. But your users shouldn't be affected in any way.
 
 ## Release Notes
 
@@ -320,7 +351,6 @@ The good news is, assuming you are building packages to then upload them to PyPI
 
 * 🐛 Fix tests for CI. PR [#1](https://github.com/tiangolo/poetry-version-plugin/pull/1) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Fix Latest Changes action, set branch to main. PR [#2](https://github.com/tiangolo/poetry-version-plugin/pull/2) by [@tiangolo](https://github.com/tiangolo).
-
 
 ## License
 
