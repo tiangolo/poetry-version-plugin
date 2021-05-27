@@ -318,6 +318,7 @@ The good news is, assuming you are building packages to then upload them to PyPI
 
 ### Latest Changes
 
+* 🐛 Fix tests for CI. PR [#1](https://github.com/tiangolo/poetry-version-plugin/pull/1) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Fix Latest Changes action, set branch to main. PR [#2](https://github.com/tiangolo/poetry-version-plugin/pull/2) by [@tiangolo](https://github.com/tiangolo).
 
 
