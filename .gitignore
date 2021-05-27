@@ -1,5 +1,7 @@
 .mypy_cache/
-env3.6/
+env*
 poetry.lock
 dist/
 __pycache__/
+htmlcov
+.coverage*
