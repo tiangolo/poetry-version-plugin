@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9, 3.10.0-beta.1]
+        python-version: [3.6, 3.7, 3.8, 3.9]
       fail-fast: false
     
     steps:
@@ -39,6 +39,9 @@ jobs:
         run: python -m poetry run pip --version >/dev/null 2>&1 || rm -rf .venv
       - name: Install Dependencies
         run: python -m poetry install
+      - name: Lint
+        if: matrix.python-version != 3.6
+        run: python -m poetry run bash scripts/lint.sh
       - name: Test
         run: python -m poetry run bash scripts/test.sh
       - name: Upload coverage
