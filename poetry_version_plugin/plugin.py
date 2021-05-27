@@ -61,7 +61,10 @@ class VersionPlugin(Plugin):  # type: ignore
                                     version = value_node.value
                                 elif isinstance(value_node, ast.Str):
                                     version = value_node.s
-                                else:
+                                else:  # pragma: nocover
+                                    # This is actually covered by tests, but can't be
+                                    # reported by Coverage
+                                    # Ref: https://github.com/nedbat/coveragepy/issues/198
                                     continue
                                 io.write_line(
                                     "Setting package dynamic version to __version__ "
