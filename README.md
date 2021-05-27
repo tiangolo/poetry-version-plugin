@@ -23,7 +23,7 @@ It can read the version from a file `__init__.py` with:
 __version__ = "0.1.0"
 ```
 
-or alternatively, it can read it from a **git tag**, set with:
+or alternatively, it can read it from a **git tag**, set with a GitHub release or with:
 
 ```console
 $ git tag 0.1.0
@@ -243,7 +243,7 @@ $ poetry --version
 Poetry (version 1.2.0a1)
 ```
 
-## Version in init file support
+## Support for version in init file
 
 When using a `__version__` variable in your `__init__.py` you can have more logic in that file, import modules, and do more things above and below the declaration of that variable.
 
@@ -261,6 +261,8 @@ This is all fine and supported in your `__init__.py`:
 
 ```python
 # __init__.py
+
+# This is all valid 👍✅
 
 from .main import do_awesome_stuff, AwesomeClass
 
@@ -282,6 +284,8 @@ This example is all valid and supported, and it includes:
 * Comments
 * The same string `__version__` inside a comment
 * If blocks around
+
+---
 
 But this is not supported:
 
