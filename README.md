@@ -293,7 +293,7 @@ But this is not supported:
 # 🚨 Not supported
 
 if 2 == 2:
-    __version__ = "0.1.0
+    __version__ = "0.1.0"
 ```
 
 And this is not supported:
