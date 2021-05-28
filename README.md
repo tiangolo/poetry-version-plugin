@@ -23,19 +23,19 @@ It can read the version from a file `__init__.py` with:
 __version__ = "0.1.0"
 ```
 
-or alternatively, it can read it from a **git tag**, set with a GitHub release or with:
+Alternatively, it can read it from a **git tag**, set with a GitHub release or with:
 
 ```console
 $ git tag 0.1.0
 ```
 
-🚨 Consider this in alpha stage. Read the warning below.
+🚨 Consider this in the alpha stage. Read the warning below.
 
 ## When to use
 
 This is useful mainly if you are building a package library for others to use and you want to set the version in a place different than `pyproject.toml`, but you still want to keep a [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth).
 
-It won't be useful in other use cases like managing local app environments with Poetry.
+It won't be helpful in other use cases like managing local app environments with Poetry.
 
 ## How to use
 
@@ -68,7 +68,7 @@ And then edit your `pyproject.toml` with a section containing:
 source = "init"
 ```
 
-Next, build your project, it will show an output like:
+Next, build your project. It will show an output like:
 
 ```console
 $ poetry build
@@ -96,7 +96,7 @@ Then create a git tag, for example:
 $ git tag 0.1.3
 ```
 
-In this case, when building your project it will show an output like:
+In this case, when building your project, it will show an output like:
 
 ```console
 $ poetry build
@@ -114,7 +114,7 @@ Currently (2021-05-24) Poetry requires a `version` configuration in the `pyproje
 
 When using this plugin, that `version` config won't be used, but Poetry still requires it to be present in the `pyproject.toml`.
 
-To make it more obvious that you are not really using that `version` you can set it to `0`.
+To make it more evident that you are not using that `version` you can set it to `0`.
 
 ```toml
 [tool.poetry]
@@ -149,9 +149,9 @@ source = "init"
 
 ## Why
 
-By default Poetry expects you to set your package version in `pyproject.toml`. And that would work in most cases.
+By default, Poetry expects you to set your package version in `pyproject.toml`. And that would work in most cases.
 
-But imagine you want to expose the version of your package in a `__version__` variable, so that your users can do things like:
+But imagine you want to expose the version of your package in a `__version__` variable so that your users can do things like:
 
 ```python
 import my_awesome_package
@@ -169,7 +169,7 @@ But that module is only available in Python 3.8 and above. So, for Python 3.7 an
 importlib-metadata = {version = "^1.0", python = "<3.8"}
 ```
 
-But then, when they release each new version of the backport (currently `4.0.1`), you have to update it (or not). And your users would have to manually handle conflicts with any other packages that also depend on `importlib-metadata`, which could be multiple, as many packages could be doing the same trick (I've dealt with that).
+But then, when they release each new version of the backport (currently `4.0.1`), you have to update it (or not). And your users would have to manually handle conflicts with any other packages that also depend on `importlib-metadata` which could be multiple, as many packages could be doing the same trick (I've dealt with that).
 
 The other option is not to pin any version range of your `importlib-metadata` in your `pyproject.toml` and hope for the best.
 
@@ -234,7 +234,7 @@ $ python install-poetry.py --preview
 --> 100%
 ```
 
-🔍 Notice that the new installer file is named `install-poetry.py` instead of `get-poetry.py`. Also notice that, currently, you need to set `--preview` for it to install the alpha version `1.2.0a1`.
+🔍 Notice that the new installer file is named `install-poetry.py` instead of `get-poetry.py`. Also, notice that, currently, you need to set `--preview` for it to install the alpha version `1.2.0a1`.
 
 You can check that it worked with:
 
@@ -255,7 +255,7 @@ ___version___ = "0.2.0"
 
 ...instead of calling a function or something similar.
 
-And the variable has to be in the top-level, so it can't be inside an `if` statement or similar.
+And the variable has to be at the top-level, so it can't be inside an `if` statement or similar.
 
 This is all fine and supported in your `__init__.py`:
 
@@ -309,7 +309,7 @@ __version__ = get_version()
 
 ## How the plugin works
 
-Poetry runs the plugin when building a package, and it sets the version right before creating the "package distributable" (e.g. the wheel).
+Poetry runs the plugin when building a package, and it sets the version right before creating the "package distributable" (e.g., the wheel).
 
 ### How the version variable works
 
@@ -317,7 +317,7 @@ If you have a package (a single package) declared in the `packages` config in yo
 
 If you don't have any `packages` config, the plugin will assume that you have a single package named as your project, but in the module version (changing `-` for `_`). So, if your package is `my-awesome-project`, the plugin will use the file at `my_awesome_project/__init__.py` to find the `__version__` variable.
 
-This file structure is the default if you create a new project with the command `poetry new`, so it should just work as expected. ✨
+This file structure is the default if you create a new project with the command `poetry new`, so it should work as expected. ✨
 
 The way the plugin works internally is by parsing the `__init__.py` file. Reading the Python's "Abstract Syntax Tree" using the `ast` standard module and extracting the literal value of the string. So, it doesn't execute the code in `__init__.py`, it only reads it as Python code.
 
@@ -325,13 +325,13 @@ The plugin doesn't try to import and execute that `__init__.py` file because tha
 
 ## Warning
 
-🚨 Consider this in alpha stage. Poetry `1.2.0a1` with support for plugins was released on 2021-05-21, I started writing this plugin 3 days later, on 2021-05-24.
+🚨 Consider this in the alpha stage. Poetry `1.2.0a1` with support for plugins was released on 2021-05-21. I started writing this plugin 3 days later, on 2021-05-24.
 
 Things might break in Poetry or in this plugin. So, please try it and test it very carefully before fully adopting it for delicate systems.
 
 The way it works might change, and the specific configuration might change.
 
-Also, if you don't find intuitive the sections:
+Also, if you don't find the following sections intuitive:
 
 ```toml
 [tool.poetry-version-plugin]
