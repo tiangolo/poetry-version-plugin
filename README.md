@@ -353,6 +353,7 @@ let me know what alternative configuration would make more sense and be more int
 
 ### Latest Changes
 
+* ✏️ Fix typos and rewording in README.md. PR [#8](https://github.com/tiangolo/poetry-version-plugin/pull/8) by [@Gl0deanR](https://github.com/Gl0deanR).
 ### 0.1.3
 
 * ✨ Improve logs, prefix with plugin name. PR [#6](https://github.com/tiangolo/poetry-version-plugin/pull/6) by [@tiangolo](https://github.com/tiangolo).
