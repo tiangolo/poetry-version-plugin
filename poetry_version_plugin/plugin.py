@@ -3,7 +3,7 @@ import subprocess
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from cleo.io.io import IO
+from cleo.io.io import IO, Verbosity
 from poetry.plugins.plugin import Plugin
 from poetry.poetry import Poetry
 from poetry.utils.helpers import module_name
@@ -50,7 +50,8 @@ class VersionPlugin(Plugin):  # type: ignore
             else:
                 io.write_line(
                     "<b>poetry-version-plugin</b>: Using __init__.py file at "
-                    f"{init_path} for dynamic version"
+                    f"{init_path} for dynamic version",
+                    verbosity=Verbosity.VERBOSE
                 )
             tree = ast.parse(init_path.read_text())
             for el in tree.body:
@@ -72,7 +73,8 @@ class VersionPlugin(Plugin):  # type: ignore
                                 io.write_line(
                                     "<b>poetry-version-plugin</b>: Setting package "
                                     "dynamic version to __version__ "
-                                    f"variable from __init__.py: <b>{version}</b>"
+                                    f"variable from __init__.py: <b>{version}</b>",
+                                    verbosity=Verbosity.VERBOSE
                                 )
                                 poetry.package.set_version(version)
                                 return
@@ -93,7 +95,8 @@ class VersionPlugin(Plugin):  # type: ignore
                 tag = result.stdout.strip()
                 io.write_line(
                     "<b>poetry-version-plugin</b>: Git tag found, setting "
-                    f"dynamic version to: {tag}"
+                    f"dynamic version to: {tag}",
+                    verbosity=Verbosity.VERBOSE
                 )
                 poetry.package.set_version(tag)
                 return
