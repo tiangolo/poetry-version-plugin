@@ -27,9 +27,11 @@ class VersionPlugin(Plugin):  # type: ignore
             raise RuntimeError(message)
         if version_source == "init":
             packages = poetry.local_config.get("packages")
+            package_prefix = ""
             if packages:
                 if len(packages) == 1:
                     package_name = packages[0]["include"]
+                    package_prefix = packages[0].get("from", "")
                 else:
                     message = (
                         "<b>poetry-version-plugin</b>: More than one package set, "
@@ -39,7 +41,7 @@ class VersionPlugin(Plugin):  # type: ignore
                     raise RuntimeError(message)
             else:
                 package_name = module_name(poetry.package.name)
-            init_path = Path(package_name) / "__init__.py"
+            init_path = Path(package_prefix) / Path(package_name) / "__init__.py"
             if not init_path.is_file():
                 message = (
                     "<b>poetry-version-plugin</b>: __init__.py file not found at "
