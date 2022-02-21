@@ -51,6 +51,14 @@ $ poetry plugin add poetry-version-plugin
 --> 100%
 ```
 
+Or install this plugin to your Poetry with pipx:
+
+```console
+$ pipx inject poetry poetry-version-plugin
+
+--> 100%
+```
+
 ### Set version in init file
 
 Set your package version in your file `__init__.py`, for example:
