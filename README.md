@@ -46,7 +46,7 @@ Make sure you have Poetry version `1.2.0a1` or above. Read below for instruction
 Install this plugin to your Poetry:
 
 ```console
-$ poetry plugin add poetry-version-plugin
+$ poetry self add poetry-version-plugin
 
 --> 100%
 ```
