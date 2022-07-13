@@ -39,14 +39,14 @@ It won't be helpful in other use cases like managing local app environments with
 
 ## How to use
 
-Make sure you have Poetry version `1.2.0a1` or above. Read below for instructions to install it if you haven't.
+Make sure you have Poetry version `1.2.0b2` or above. Read below for instructions to install it if you haven't.
 
 ### Install Poetry Version Plugin
 
 Install this plugin to your Poetry:
 
 ```console
-$ poetry plugin add poetry-version-plugin
+$ poetry self add poetry-version-plugin
 
 --> 100%
 ```
