@@ -39,7 +39,7 @@ It won't be helpful in other use cases like managing local app environments with
 
 ## How to use
 
-Make sure you have Poetry version `1.2.0a1` or above. Read below for instructions to install it if you haven't.
+Make sure you have Poetry version `1.2.0rc2` or above. Read below for instructions to install it if you haven't.
 
 ### Install Poetry Version Plugin
 
@@ -206,11 +206,11 @@ So, you could only create each version in a Git tag (for example, a GitHub relea
 
 And then build the package on Continuous Integration (e.g. GitHub Actions). And this plugin would get the version of the package from that Git tag.
 
-## Install Poetry `1.2.0a1`
+## Install Poetry `1.2.0rc2`
 
-For this plugin to work, you need Poetry version `1.2.0a1` or above.
+For this plugin to work, you need Poetry version `1.2.0rc2` or above.
 
-[Poetry `1.2.0a1` was released recently](https://python-poetry.org/blog/announcing-poetry-1-2-0a1.html).
+[Poetry `1.2.0rc2` was released recently](https://python-poetry.org/blog/announcing-poetry-1.2.0rc2/).
 
 There's a high chance you already have installed Poetry `1.1.x`.
 
@@ -234,13 +234,13 @@ $ python install-poetry.py --preview
 --> 100%
 ```
 
-🔍 Notice that the new installer file is named `install-poetry.py` instead of `get-poetry.py`. Also, notice that, currently, you need to set `--preview` for it to install the alpha version `1.2.0a1`.
+🔍 Notice that the new installer file is named `install-poetry.py` instead of `get-poetry.py`. Also, notice that, currently, you need to set `--preview` for it to install the alpha version `1.2.0rc2`.
 
 You can check that it worked with:
 
 ```console
 $ poetry --version
-Poetry (version 1.2.0a1)
+Poetry (version 1.2.0rc2)
 ```
 
 ## Support for version in init file
