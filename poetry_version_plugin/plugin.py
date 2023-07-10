@@ -26,7 +26,8 @@ class VersionPlugin(Plugin):
             io.write_error_line(message)
             raise RuntimeError(message)
         if version_source == "init":
-            if packages := poetry.local_config.get("packages"):
+            packages = poetry.local_config.get("packages")
+            if packages:
                 if len(packages) == 1:
                     package_name = packages[0]["include"]
                 else:
