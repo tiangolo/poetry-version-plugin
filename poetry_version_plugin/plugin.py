@@ -4,12 +4,12 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 
 from cleo.io.io import IO
+from poetry.core.utils.helpers import module_name
 from poetry.plugins.plugin import Plugin
 from poetry.poetry import Poetry
-from poetry.utils.helpers import module_name
 
 
-class VersionPlugin(Plugin):  # type: ignore
+class VersionPlugin(Plugin):
     def activate(self, poetry: Poetry, io: IO) -> None:
         poetry_version_config: Optional[Dict[str, Any]] = poetry.pyproject.data.get(
             "tool", {}
@@ -74,7 +74,7 @@ class VersionPlugin(Plugin):  # type: ignore
                                     "dynamic version to __version__ "
                                     f"variable from __init__.py: <b>{version}</b>"
                                 )
-                                poetry.package.set_version(version)
+                                poetry.package._set_version(version)
                                 return
             message = (
                 "<b>poetry-version-plugin</b>: No valid __version__ variable found "
@@ -95,7 +95,7 @@ class VersionPlugin(Plugin):  # type: ignore
                     "<b>poetry-version-plugin</b>: Git tag found, setting "
                     f"dynamic version to: {tag}"
                 )
-                poetry.package.set_version(tag)
+                poetry.package._set_version(tag)
                 return
             else:
                 message = (
