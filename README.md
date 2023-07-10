@@ -353,6 +353,7 @@ let me know what alternative configuration would make more sense and be more int
 
 ### Latest Changes
 
+* ✨ Add support for Poetry 1.2.0 and above (including 1.5.1), deprecate support for Python 3.6. PR [#28](https://github.com/tiangolo/poetry-version-plugin/pull/28) by [@mbeacom](https://github.com/mbeacom).
 * ✏️ Fix typos and rewording in README.md. PR [#8](https://github.com/tiangolo/poetry-version-plugin/pull/8) by [@Gl0deanR](https://github.com/Gl0deanR).
 ### 0.1.3
 
