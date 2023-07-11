@@ -54,28 +54,26 @@ class VersionPlugin(Plugin):
                 )
             tree = ast.parse(init_path.read_text())
             for el in tree.body:
-                if isinstance(el, ast.Assign):
-                    if len(el.targets) == 1:
-                        target = el.targets[0]
-                        if isinstance(target, ast.Name):
-                            if target.id == "__version__":
-                                value_node = el.value
-                                if isinstance(value_node, ast.Constant):
-                                    version = value_node.value
-                                elif isinstance(value_node, ast.Str):
-                                    version = value_node.s
-                                else:  # pragma: nocover
-                                    # This is actually covered by tests, but can't be
-                                    # reported by Coverage
-                                    # Ref: https://github.com/nedbat/coveragepy/issues/198
-                                    continue
-                                io.write_line(
-                                    "<b>poetry-version-plugin</b>: Setting package "
-                                    "dynamic version to __version__ "
-                                    f"variable from __init__.py: <b>{version}</b>"
-                                )
-                                poetry.package._set_version(version)
-                                return
+                if isinstance(el, ast.Assign) and len(el.targets) == 1:
+                    target = el.targets[0]
+                    if isinstance(target, ast.Name) and target.id == "__version__":
+                        value_node = el.value
+                        if isinstance(value_node, ast.Constant):
+                            version = value_node.value
+                        elif isinstance(value_node, ast.Str):
+                            version = value_node.s
+                        else:  # pragma: nocover
+                            # This is actually covered by tests, but can't be
+                            # reported by Coverage
+                            # Ref: https://github.com/nedbat/coveragepy/issues/198
+                            continue
+                        io.write_line(
+                            "<b>poetry-version-plugin</b>: Setting package "
+                            "dynamic version to __version__ "
+                            f"variable from __init__.py: <b>{version}</b>"
+                        )
+                        poetry.package._set_version(version)
+                        return
             message = (
                 "<b>poetry-version-plugin</b>: No valid __version__ variable found "
                 "in __init__.py, cannot extract dynamic version"
