@@ -37,6 +37,10 @@ This is useful mainly if you are building a package library for others to use an
 
 It won't be helpful in other use cases like managing local app environments with Poetry.
 
+## Alternatives
+
+If you are building a package library and want this functionality but you don't really need anything else from Poetry you are probably better off using [Hatch](https://hatch.pypa.io/latest/), [PDM](https://pdm.fming.dev/latest/), or another alternative that comes with this functionality built in without requiring plugins.
+
 ## How to use
 
 Make sure you have Poetry version `1.2.0` or above. Read below for instructions to install it if you haven't.
@@ -46,7 +50,7 @@ Make sure you have Poetry version `1.2.0` or above. Read below for instructions 
 Install this plugin to your Poetry:
 
 ```console
-$ poetry plugin add poetry-version-plugin
+$ poetry self add poetry-version-plugin
 
 --> 100%
 ```
