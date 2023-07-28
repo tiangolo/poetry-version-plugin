@@ -357,6 +357,7 @@ let me know what alternative configuration would make more sense and be more int
 
 ### Latest Changes
 
+* 📝 Update README, update install command, recommend Hatch and PDM. PR [#31](https://github.com/tiangolo/poetry-version-plugin/pull/31) by [@tiangolo](https://github.com/tiangolo).
 
 ### 0.2.0
 
