@@ -166,7 +166,7 @@ You could manually write the `__version__` variable and handle the synchronizati
 
 The current [official way of doing it without duplicating the value](https://github.com/python-poetry/poetry/pull/2366#issuecomment-652418094) is with `importlib.metadata`.
 
-But that module is only available in Python 3.8 and above. So, for Python 3.7 and 3.6 you have to install a backport as a dependency of your package:
+But that module is only available in Python 3.8 and above. So, for Python 3.7 you have to install a backport as a dependency of your package:
 
 ```toml
 [tool.poetry.dependencies]

@@ -7,7 +7,7 @@ readme = "README.md"
 packages = [{include = "test_custom_version", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.7"
 
 [build-system]
 requires = ["poetry-core"]
