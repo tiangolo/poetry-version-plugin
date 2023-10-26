@@ -210,3 +210,87 @@ def test_git_tag(tmp_path: Path):
     wheel_path = testing_dir / "dist" / "test_custom_version-0.0.9-py3-none-any.whl"
     info = pkginfo.get_metadata(str(wheel_path))
     assert info.version == "0.0.9"
+
+
+def test_file_regex(tmp_path: Path):
+    testing_dir = tmp_path / "testing_package"
+    copy_assets("file_regex", testing_dir)
+    result = build_package(testing_dir=testing_dir)
+    assert result.returncode == 0
+    assert (
+        "poetry-version-plugin: Using file at "
+        "CHANGELOG.md for dynamic version" in result.stdout
+    )
+    assert (
+        "poetry-version-plugin: Setting package "
+        "dynamic version to regex match result of file contents "
+        "from CHANGELOG.md: 0.0.2" in result.stdout
+    )
+    assert "Built test_custom_version-0.0.2-py3-none-any.whl" in result.stdout
+    wheel_path = testing_dir / "dist" / "test_custom_version-0.0.2-py3-none-any.whl"
+    info = pkginfo.get_metadata(str(wheel_path))
+    assert info.version == "0.0.2"
+
+
+def test_file_plain(tmp_path: Path):
+    testing_dir = tmp_path / "testing_package"
+    copy_assets("file_plain", testing_dir)
+    result = build_package(testing_dir=testing_dir)
+    assert result.returncode == 0
+    assert (
+        "poetry-version-plugin: Using file at "
+        "VERSION for dynamic version" in result.stdout
+    )
+    assert (
+        "poetry-version-plugin: Setting package dynamic version "
+        "to file contents from VERSION: 0.0.1" in result.stdout
+    )
+    assert "Built test_custom_version-0.0.1-py3-none-any.whl" in result.stdout
+    wheel_path = testing_dir / "dist" / "test_custom_version-0.0.1-py3-none-any.whl"
+    info = pkginfo.get_metadata(str(wheel_path))
+    assert info.version == "0.0.1"
+
+
+def test_file_no_path(tmp_path: Path):
+    testing_dir = tmp_path / "testing_package"
+    copy_assets("file_no_path", testing_dir)
+    result = build_package(testing_dir=testing_dir)
+    assert (
+        "poetry-version-plugin: No path configuration found "
+        "in [tool.poetry-version-plugin] in pyproject.toml, cannot extract "
+        "dynamic version"
+    ) in result.stderr
+    assert result.returncode != 0
+
+
+def test_file_not_found(tmp_path: Path):
+    testing_dir = tmp_path / "testing_package"
+    copy_assets("file_not_found", testing_dir)
+    result = build_package(testing_dir=testing_dir)
+    assert (
+        "poetry-version-plugin: File path at VERSION "
+        "not found, cannot extract dynamic version"
+    ) in result.stderr
+    assert result.returncode != 0
+
+
+def test_file_regex_invalid(tmp_path: Path):
+    testing_dir = tmp_path / "testing_package"
+    copy_assets("file_regex_invalid", testing_dir)
+    result = build_package(testing_dir=testing_dir)
+    assert (
+        "poetry-version-plugin: Invalid regex match "
+        "configuration, cannot extract dynamic version"
+    ) in result.stderr
+    assert result.returncode != 0
+
+
+def test_file_regex_no_match(tmp_path: Path):
+    testing_dir = tmp_path / "testing_package"
+    copy_assets("file_regex_no_match", testing_dir)
+    result = build_package(testing_dir=testing_dir)
+    assert (
+        "poetry-version-plugin: No regex match found in file "
+        "CHANGELOG.md, cannot extract dynamic version"
+    ) in result.stderr
+    assert result.returncode != 0
