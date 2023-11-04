@@ -357,7 +357,6 @@ let me know what alternative configuration would make more sense and be more int
 
 ### Latest Changes
 
-* ⬆️ Deprecate Python 3.6 and add CI for latest versions. PR [#32](https://github.com/tiangolo/poetry-version-plugin/pull/32) by [@tiangolo](https://github.com/tiangolo).
 * 📝 Update README, update install command, recommend Hatch and PDM. PR [#31](https://github.com/tiangolo/poetry-version-plugin/pull/31) by [@tiangolo](https://github.com/tiangolo).
 
 #### Internal
@@ -368,6 +367,7 @@ let me know what alternative configuration would make more sense and be more int
 ### 0.2.0
 
 * ✨ Add support for Poetry 1.2.0 and above (including 1.5.1), deprecate support for Python 3.6. PR [#28](https://github.com/tiangolo/poetry-version-plugin/pull/28) by [@mbeacom](https://github.com/mbeacom).
+* ⬆️ Deprecate Python 3.6 and add CI for latest versions. PR [#32](https://github.com/tiangolo/poetry-version-plugin/pull/32) by [@tiangolo](https://github.com/tiangolo).
 * ✏️ Fix typos and rewording in README.md. PR [#8](https://github.com/tiangolo/poetry-version-plugin/pull/8) by [@Gl0deanR](https://github.com/Gl0deanR).
 
 ### 0.1.3
