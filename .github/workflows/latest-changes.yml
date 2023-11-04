@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.POETRY_VERSION_PLUGIN_LATEST_CHANGES }}
       - uses: docker://tiangolo/latest-changes:0.2.0
       # - uses: tiangolo/latest-changes@main
         with:
