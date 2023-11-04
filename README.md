@@ -359,6 +359,10 @@ let me know what alternative configuration would make more sense and be more int
 
 * 📝 Update README, update install command, recommend Hatch and PDM. PR [#31](https://github.com/tiangolo/poetry-version-plugin/pull/31) by [@tiangolo](https://github.com/tiangolo).
 
+#### Internal
+
+* 👷 Update token for latest-changes. PR [#36](https://github.com/tiangolo/poetry-version-plugin/pull/36) by [@tiangolo](https://github.com/tiangolo).
+
 ### 0.2.0
 
 * ✨ Add support for Poetry 1.2.0 and above (including 1.5.1), deprecate support for Python 3.6. PR [#28](https://github.com/tiangolo/poetry-version-plugin/pull/28) by [@mbeacom](https://github.com/mbeacom).
