@@ -357,6 +357,7 @@ let me know what alternative configuration would make more sense and be more int
 
 ### Latest Changes
 
+* ⬆️ Deprecate Python 3.6 and add CI for latest versions. PR [#32](https://github.com/tiangolo/poetry-version-plugin/pull/32) by [@tiangolo](https://github.com/tiangolo).
 * 📝 Update README, update install command, recommend Hatch and PDM. PR [#31](https://github.com/tiangolo/poetry-version-plugin/pull/31) by [@tiangolo](https://github.com/tiangolo).
 
 #### Internal
