@@ -104,3 +104,20 @@ class VersionPlugin(Plugin):
                 )
                 io.write_error_line(message)
                 raise RuntimeError(message)
+        elif version_source == "version_file":
+            version_file_config = poetry_version_config.get("filename")
+            version_file = Path(poetry_version_config.get("filename"))
+            if not version_file.is_file():
+                message = (
+                    "<b>poetry-version-plugin</b>: version_file was not found at "
+                    f"[{version_file_config}]. cannot extract dynamic version"
+                )
+            else:
+                version = version_file.read_text()
+                io.write_line(
+                    "<b>poetry-version-plugin</b>: Setting package "
+                    "dynamic version to __version__ "
+                    f"variable from __init__.py: <b>{version}</b>"
+                )
+                poetry.package._set_version(version)
+                return
