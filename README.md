@@ -29,6 +29,14 @@ Alternatively, it can read it from a **git tag**, set with a GitHub release or w
 $ git tag 0.1.0
 ```
 
+Alternatively, it can read a version from a static file (which may have been dynamically generated)
+```toml
+
+[tool.poetry-version-plugin]
+source = "version_file"
+filename = "src/mypackage/VERSION"
+```
+
 🚨 Consider this in the alpha stage. Read the warning below.
 
 ## When to use
@@ -111,6 +119,32 @@ Building my-awesome-package (0.1.3)
   - Building wheel
   - Built my-awesome-package-0.1.3-py3-none-any.whl
 ```
+
+### Set the version in a VERSION file
+
+With a `VERSION`` file, you can dynamically generate the file (as a step of the CI/CD pipeline for example) and read the file
+
+```python
+#__init__.py
+
+from functools import cache
+
+@cache
+def read_version_file() -> str:
+    """Simple style, read a file."""
+    try:
+        import pathlib
+        dir = pathlib.Path(__file__).parent.resolve()
+        return pathlib.Path(dir / "VERSION").read_text()
+    except Exception:
+        # Fall back in case the file was missing
+        return "0.0.0"
+
+__version__: str = read_version_file()
+
+```
+This provides a happy medium of both a static, or dynamically generated `VERSION` file that can be used
+in wider CI/CD build systems, and have both python, and poetry read the `VERSION` file.
 
 ## Version in `pyproject.toml`
 
@@ -347,6 +381,14 @@ and
 ```toml
 [tool.poetry-version-plugin]
 source = "git-tag"
+```
+
+or
+
+```toml
+[tool.poetry-version-plugin]
+source = "version_file"
+filename = "src/mypackage/VERSION"
 ```
 
 let me know what alternative configuration would make more sense and be more intuitive to you.

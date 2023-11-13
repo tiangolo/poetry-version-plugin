@@ -113,11 +113,11 @@ class VersionPlugin(Plugin):
                     f"[{version_file_config}]. cannot extract dynamic version"
                 )
             else:
-                version = version_file.read_text()
+                version = version_file.read_text().strip()
                 io.write_line(
                     "<b>poetry-version-plugin</b>: Setting package "
-                    "dynamic version to __version__ "
-                    f"variable from __init__.py: <b>{version}</b>"
+                    f"dynamic version to value from {version_file}"
+                    f": <b>{version}</b>"
                 )
                 poetry.package._set_version(version)
                 return
