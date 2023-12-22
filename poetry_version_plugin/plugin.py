@@ -136,7 +136,7 @@ class VersionPlugin(Plugin):
                     )
                     hash = result.stdout.strip()
                     result = subprocess.run(
-                        ["git", "rev-list", hash+"..HEAD", "--count"],
+                        ["git", "rev-list", tag+"..HEAD", "--count"],
                         stdin=subprocess.PIPE,
                         stdout=subprocess.PIPE,
                         universal_newlines=True,
