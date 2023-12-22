@@ -104,3 +104,54 @@ class VersionPlugin(Plugin):
                 )
                 io.write_error_line(message)
                 raise RuntimeError(message)
+        elif version_source == "git-tag-plus-hash":
+            result = subprocess.run(
+                ["git", "describe", "--exact-match", "--tags", "HEAD"],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                universal_newlines=True,
+            )
+            if result.returncode == 0:
+                tag = result.stdout.strip()
+                io.write_line(
+                    "<b>poetry-version-plugin</b>: Git tag found, setting "
+                    f"dynamic version to: {tag}"
+                )
+                poetry.package._set_version(tag)
+                return
+            else:
+                result = subprocess.run(
+                    ["git", "describe", "--tags", "--abbrev=0"],
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    universal_newlines=True,
+                )
+                if result.returncode == 0:
+                    tag = result.stdout.strip()
+                    result = subprocess.run(
+                        ["git", "rev-parse", "--short=8", "HEAD"],
+                        stdin=subprocess.PIPE,
+                        stdout=subprocess.PIPE,
+                        universal_newlines=True,
+                    )
+                    hash = result.stdout.strip()
+                    result = subprocess.run(
+                        ["git", "rev-list", hash+"..HEAD", "--count"],
+                        stdin=subprocess.PIPE,
+                        stdout=subprocess.PIPE,
+                        universal_newlines=True,
+                    )
+                    commits = result.stdout.strip()
+                    io.write_line(
+                        "<b>poetry-version-plugin</b>: Git tag plus hash found, setting "
+                        f"dynamic version to: {tag}+{commits}.{hash}"
+                    )
+                    poetry.package._set_version(tag+"+"+commits+"."+hash)
+                    return
+                else:
+                    message = (
+                       "<b>poetry-version-plugin</b>: No Git tag found, not "
+                       "extracting dynamic version"
+                    )
+                    io.write_error_line(message)
+                    raise RuntimeError(message)
