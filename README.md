@@ -29,6 +29,14 @@ Alternatively, it can read it from a **git tag**, set with a GitHub release or w
 $ git tag 0.1.0
 ```
 
+Or it can read it from a **file** and a custom **regex** search.
+```md
+# Example Changelog
+
+## 0.0.1 (2023-10-26)
+- Added feature
+```
+
 🚨 Consider this in the alpha stage. Read the warning below.
 
 ## When to use
@@ -111,6 +119,45 @@ Building my-awesome-package (0.1.3)
   - Building wheel
   - Built my-awesome-package-0.1.3-py3-none-any.whl
 ```
+
+### Set the version in a file
+
+Set your package version from a file content, for example a `VERSION` file:
+```
+0.0.1
+```
+
+Then edit your `pyproject.toml` and add a section:
+```toml
+[tool.poetry-version-plugin]
+source = "file"
+path = "VERSION"
+```
+
+### Set the version in regex search in a file
+
+Set the package version from the first regex match that is found in a file, for example `CHANGELOG.md`:
+```
+# Changelog
+
+## [0.0.2] - 2023-10-26
+
+- Update version
+
+## [0.0.1] - 2023-10-26
+
+- Add changelog
+```
+
+Configure the regex pattern in your `pyproject.toml`:
+```toml
+[tool.poetry-version-plugin]
+source = "file"
+path = "CHANGELOG.md"
+match = '^## \[(?P<version>\d+(\.\d+)+)]'
+```
+
+The version will be the named match group `version` if available, else the first match group or the full match.
 
 ## Version in `pyproject.toml`
 

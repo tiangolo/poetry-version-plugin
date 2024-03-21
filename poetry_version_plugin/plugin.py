@@ -1,4 +1,5 @@
 import ast
+import re
 import subprocess
 from pathlib import Path
 from typing import Any, Dict, Optional
@@ -104,3 +105,63 @@ class VersionPlugin(Plugin):
                 )
                 io.write_error_line(message)
                 raise RuntimeError(message)
+        elif version_source == "file":
+            file_path_config = poetry_version_config.get("path")
+            if not file_path_config:
+                message = (
+                    "<b>poetry-version-plugin</b>: No <b>path</b> configuration found "
+                    "in [tool.poetry-version-plugin] in pyproject.toml, cannot extract "
+                    "dynamic version"
+                )
+                io.write_error_line(message)
+                raise RuntimeError(message)
+            file_path = Path(file_path_config)
+            if not file_path.is_file():
+                message = (
+                    f"<b>poetry-version-plugin</b>: File <b>path</b> at {file_path} "
+                    "not found, cannot extract dynamic version"
+                )
+                io.write_error_line(message)
+                raise RuntimeError(message)
+            io.write_line(
+                "<b>poetry-version-plugin</b>: Using file at "
+                f"{file_path} for dynamic version"
+            )
+            version = file_path.read_text()
+            version_pattern = poetry_version_config.get("match")
+            if not version_pattern:
+                io.write_line(
+                    "<b>poetry-version-plugin</b>: Setting package dynamic version "
+                    f"to file contents from {file_path}: <b>{version}</b>"
+                )
+                poetry.package._set_version(version.strip())
+                return
+            else:
+                try:
+                    match = re.search(version_pattern, version, flags=re.MULTILINE)
+                except re.error as exc:
+                    message = (
+                        "<b>poetry-version-plugin</b>: Invalid regex <b>match</b> "
+                        "configuration, cannot extract dynamic version"
+                    )
+                    io.write_error_line(message)
+                    raise RuntimeError(message) from exc
+                if not match:
+                    message = (
+                        "<b>poetry-version-plugin</b>: No regex match found in file "
+                        f"{file_path}, cannot extract dynamic version"
+                    )
+                    io.write_error_line(message)
+                    raise RuntimeError(message)
+                version = (
+                    match.groupdict().get("version")
+                    or next(iter(match.groups()), None)
+                    or match.group()
+                )
+                io.write_line(
+                    "<b>poetry-version-plugin</b>: Setting package "
+                    "dynamic version to regex match result of file contents "
+                    f"from {file_path}: <b>{version}</b>"
+                )
+                poetry.package._set_version(version)
+                return
