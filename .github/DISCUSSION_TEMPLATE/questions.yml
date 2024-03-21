@@ -72,9 +72,9 @@ body:
 
         Write a short description telling me what you are doing, what you expect to happen, and what is currently happening.
       placeholder: |
-        * Open the browser and call the endpoint `/`.
-        * It returns a JSON with `{"message": "Hello World"}`.
-        * But I expected it to return `{"message": "Hello Morty"}`.
+        * Add this plugin to Poetry.
+        * Run `poetry install`.
+        * I expected it to change the version inside of the `__init__.py`, but it didn't.
     validations:
       required: true
   - type: dropdown
