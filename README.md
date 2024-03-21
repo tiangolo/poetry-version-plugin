@@ -361,6 +361,7 @@ let me know what alternative configuration would make more sense and be more int
 
 #### Internal
 
+* 🔧 Add GitHub templates for discussions and issues, and security policy. PR [#55](https://github.com/tiangolo/poetry-version-plugin/pull/55) by [@alejsdev](https://github.com/alejsdev).
 * 👷 Add dependabot. PR [#37](https://github.com/tiangolo/poetry-version-plugin/pull/37) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Upgrade latest-changes GitHub Action. PR [#35](https://github.com/tiangolo/poetry-version-plugin/pull/35) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Update token for latest-changes. PR [#36](https://github.com/tiangolo/poetry-version-plugin/pull/36) by [@tiangolo](https://github.com/tiangolo).
