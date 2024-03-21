@@ -112,6 +112,49 @@ Building my-awesome-package (0.1.3)
   - Built my-awesome-package-0.1.3-py3-none-any.whl
 ```
 
+### Set the version in a Git tag and add commits and hash
+
+Another alternative , to extract the version to use from a Git tag, but also add commits and hashes when there have been commits since the last tag.
+Add a section:
+
+```toml
+[tool.poetry-version-plugin]
+source = "git-tag-plus-hash"
+```
+
+Then create a git tag, for example:
+
+```console
+$ git tag 0.1.3
+```
+
+In this case, when building your project, it will show an output like:
+
+```console
+$ poetry build
+Git tag found, setting dynamic version to: 0.1.3
+Building my-awesome-package (0.1.3)
+  - Building sdist
+  - Built my-awesome-package-0.1.3.tar.gz
+  - Building wheel
+  - Built my-awesome-package-0.1.3-py3-none-any.whl
+```
+
+But, if there has been a git commit after the last tag, the output will be like:
+
+```console
+$ poetry build
+Git tag plus hash found, setting dynamic version to: 0.1.3+0.76cdb16a
+Building my-awesome-package (0.1.3+0.76cdb16a)
+  - Building sdist
+  - Built my-awesome-package-0.1.3+0.76cdb16a.tar.gz
+  - Building wheel
+  - Built my-awesome-package-0.1.3+0.76cdb16a-py3-none-any.whl
+```
+
+This can be useful for autobuilding commits.
+
+
 ## Version in `pyproject.toml`
 
 Currently (2021-05-24) Poetry requires a `version` configuration in the `pyproject.toml`, even if you use this plugin.
@@ -347,6 +390,13 @@ and
 ```toml
 [tool.poetry-version-plugin]
 source = "git-tag"
+```
+
+and
+
+```toml
+[tool.poetry-version-plugin]
+source = "git-tag-plus-hash"
 ```
 
 let me know what alternative configuration would make more sense and be more intuitive to you.
