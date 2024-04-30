@@ -30,6 +30,7 @@ class VersionPlugin(Plugin):
             if packages:
                 if len(packages) == 1:
                     package_name = packages[0]["include"]
+                    package_path = packages[0].get("from", ".")
                 else:
                     message = (
                         "<b>poetry-version-plugin</b>: More than one package set, "
@@ -39,18 +40,19 @@ class VersionPlugin(Plugin):
                     raise RuntimeError(message)
             else:
                 package_name = module_name(poetry.package.name)
-            init_path = Path(package_name) / "__init__.py"
+                package_path = "."
+            init_path = Path(package_path) / package_name / "__init__.py"
             if not init_path.is_file():
                 message = (
                     "<b>poetry-version-plugin</b>: __init__.py file not found at "
-                    f"{init_path} cannot extract dynamic version"
+                    f"{init_path.resolve()} cannot extract dynamic version"
                 )
                 io.write_error_line(message)
                 raise RuntimeError(message)
             else:
                 io.write_line(
                     "<b>poetry-version-plugin</b>: Using __init__.py file at "
-                    f"{init_path} for dynamic version"
+                    f"{init_path.resolve()} for dynamic version"
                 )
             tree = ast.parse(init_path.read_text())
             for el in tree.body:
