@@ -361,6 +361,7 @@ let me know what alternative configuration would make more sense and be more int
 
 #### Internal
 
+* 👷 Update `issue-manager.yml`. PR [#61](https://github.com/tiangolo/poetry-version-plugin/pull/61) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Update `latest-changes` GitHub Action. PR [#60](https://github.com/tiangolo/poetry-version-plugin/pull/60) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Update issue-manager.yml GitHub Action permissions. PR [#59](https://github.com/tiangolo/poetry-version-plugin/pull/59) by [@tiangolo](https://github.com/tiangolo).
 * 🔧 Add GitHub templates for discussions and issues, and security policy. PR [#55](https://github.com/tiangolo/poetry-version-plugin/pull/55) by [@alejsdev](https://github.com/alejsdev).
