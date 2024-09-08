@@ -394,6 +394,7 @@ let me know what alternative configuration would make more sense and be more int
 
 #### Internal
 
+* ⬆ Update coverage requirement from ^5.5 to ^7.2. PR [#42](https://github.com/tiangolo/poetry-version-plugin/pull/42) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump codecov/codecov-action from 1 to 4. PR [#53](https://github.com/tiangolo/poetry-version-plugin/pull/53) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump tiangolo/issue-manager from 0.5.0 to 0.5.1. PR [#64](https://github.com/tiangolo/poetry-version-plugin/pull/64) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump actions/cache from 1 to 4. PR [#51](https://github.com/tiangolo/poetry-version-plugin/pull/51) by [@dependabot[bot]](https://github.com/apps/dependabot).
