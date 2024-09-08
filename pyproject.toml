@@ -40,7 +40,7 @@ mypy = "^1.4.1"
 pytest = "^7.1.2"
 flake8 = "^3.9.2"
 black = "^23.3.0"
-coverage = {extras = ["toml"], version = "^5.5"}
+coverage = {extras = ["toml"], version = "^7.2"}
 pkginfo = "^1.7.0"
 autoflake = "^1.4"
 isort = "^5.8.0"
