@@ -394,6 +394,7 @@ let me know what alternative configuration would make more sense and be more int
 
 #### Internal
 
+* ⬆ Bump actions/checkout from 2 to 4. PR [#41](https://github.com/tiangolo/poetry-version-plugin/pull/41) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * 👷 Update `issue-manager.yml`. PR [#61](https://github.com/tiangolo/poetry-version-plugin/pull/61) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Update `latest-changes` GitHub Action. PR [#60](https://github.com/tiangolo/poetry-version-plugin/pull/60) by [@tiangolo](https://github.com/tiangolo).
 * 👷 Update issue-manager.yml GitHub Action permissions. PR [#59](https://github.com/tiangolo/poetry-version-plugin/pull/59) by [@tiangolo](https://github.com/tiangolo).
