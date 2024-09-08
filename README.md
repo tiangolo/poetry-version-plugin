@@ -383,6 +383,10 @@ let me know what alternative configuration would make more sense and be more int
 
 * 📝 Update README, update install command, recommend Hatch and PDM. PR [#31](https://github.com/tiangolo/poetry-version-plugin/pull/31) by [@tiangolo](https://github.com/tiangolo).
 
+#### Docs
+
+* 📝 Deprecate poetry-version-plugin, recommend uv, PDM. PR [#62](https://github.com/tiangolo/poetry-version-plugin/pull/62) by [@tiangolo](https://github.com/tiangolo).
+
 #### Internal
 
 * 👷 Update `issue-manager.yml`. PR [#61](https://github.com/tiangolo/poetry-version-plugin/pull/61) by [@tiangolo](https://github.com/tiangolo).
