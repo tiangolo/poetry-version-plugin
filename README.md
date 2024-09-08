@@ -394,6 +394,7 @@ let me know what alternative configuration would make more sense and be more int
 
 #### Internal
 
+* ⬆ Bump actions/cache from 1 to 4. PR [#51](https://github.com/tiangolo/poetry-version-plugin/pull/51) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump actions/setup-python from 1 to 5. PR [#47](https://github.com/tiangolo/poetry-version-plugin/pull/47) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * ⬆ Bump actions/checkout from 2 to 4. PR [#41](https://github.com/tiangolo/poetry-version-plugin/pull/41) by [@dependabot[bot]](https://github.com/apps/dependabot).
 * 👷 Update `issue-manager.yml`. PR [#61](https://github.com/tiangolo/poetry-version-plugin/pull/61) by [@tiangolo](https://github.com/tiangolo).
