@@ -1,3 +1,27 @@
+## 🚨 WARNING: DEPRECATED 🚨
+
+This project is deprecated. You should not use it. And if you use it for existing libraries, you should migrate to other projects.
+
+### Building an Application
+
+If you are building an application (instead of a library package) and you want to have a lock file with the exact dependencies you use for exact replication, I would recommend you try [`uv`](https://github.com/astral-sh/uv).
+
+### Building a Library
+
+If you are building a library for others to use, you can also use [`uv`](https://github.com/astral-sh/uv) to manage the project and then you can use [PDM](https://pdm-project.org/en/latest/) for the library building part, it has [built-in support for dynamic versions](https://pdm-project.org/en/latest/reference/pep621/#package-version).
+
+If you want to extract the version from somewhere else or modify the metadata in any way, PDM also has build [hooks](https://pdm-project.org/en/latest/usage/hooks/) that you can use.
+
+### Migrating
+
+If you already have a library with Poetry using this, you can migrate to PDM with the [`import` command](https://pdm-project.org/en/latest/usage/project/#import-the-project-from-other-package-managers).
+
+PDM, `uv` and others use a standard for declaring the project metadata and dependencies in `pyproject.toml`, so, if you migrate to the standard format with that PDM `import` command, you will be able to use any of the compatible tools, for example `uv`.
+
+---
+
+The information below is kept only for historical reasons. 🤓 🦕
+
 # Poetry Version Plugin
 
 <a href="https://github.com/tiangolo/poetry-version-plugin/actions?query=workflow%3ATest" target="_blank">
