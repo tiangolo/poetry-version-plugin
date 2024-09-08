@@ -389,6 +389,7 @@ let me know what alternative configuration would make more sense and be more int
 
 #### Docs
 
+* 📝 Add mention about poetry-dynamic-versioning. PR [#63](https://github.com/tiangolo/poetry-version-plugin/pull/63) by [@tiangolo](https://github.com/tiangolo).
 * 📝 Deprecate poetry-version-plugin, recommend uv, PDM. PR [#62](https://github.com/tiangolo/poetry-version-plugin/pull/62) by [@tiangolo](https://github.com/tiangolo).
 
 #### Internal
