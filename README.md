@@ -18,6 +18,10 @@ If you already have a library with Poetry using this, you can migrate to PDM wit
 
 PDM, `uv` and others use a standard for declaring the project metadata and dependencies in `pyproject.toml`, so, if you migrate to the standard format with that PDM `import` command, you will be able to use any of the compatible tools, for example `uv`.
 
+## Poetry Alternative
+
+If for some reason you need to stay using Poetry, you can consider [poetry-dynamic-versioning](https://github.com/mtkennerly/poetry-dynamic-versioning). ✨
+
 ---
 
 The information below is kept only for historical reasons. 🤓 🦕
