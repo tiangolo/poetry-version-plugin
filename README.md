@@ -385,10 +385,17 @@ let me know what alternative configuration would make more sense and be more int
 
 ### Latest Changes
 
-* 📝 Update README, update install command, recommend Hatch and PDM. PR [#31](https://github.com/tiangolo/poetry-version-plugin/pull/31) by [@tiangolo](https://github.com/tiangolo).
+### 0.2.1
+
+### 🚨 WARNING: DEPRECATED 🚨
+
+This project is deprecated. You should not use it. And if you use it for existing libraries, you should migrate to other projects.
+
+You can read more about it in the README: https://github.com/tiangolo/poetry-version-plugin.
 
 #### Docs
 
+* 📝 Update README, update install command, recommend Hatch and PDM. PR [#31](https://github.com/tiangolo/poetry-version-plugin/pull/31) by [@tiangolo](https://github.com/tiangolo).
 * 📝 Add mention about poetry-dynamic-versioning. PR [#63](https://github.com/tiangolo/poetry-version-plugin/pull/63) by [@tiangolo](https://github.com/tiangolo).
 * 📝 Deprecate poetry-version-plugin, recommend uv, PDM. PR [#62](https://github.com/tiangolo/poetry-version-plugin/pull/62) by [@tiangolo](https://github.com/tiangolo).
 
